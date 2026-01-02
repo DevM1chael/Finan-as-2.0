@@ -5,10 +5,10 @@ Programa criado para uso pessoal.
 </p>
 
 <p align="center">
-  <a href="#-tecnologias">Tecnologias</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#-projeto">Projeto</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#-layout">Layout</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#memo-licença">Licença</a>
+  <a href="#tecnologias">Tecnologias</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#projeto">Projeto</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#layout">Layout</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#licenca">Licença</a>
 </p>
 
 <p align="center">
@@ -17,9 +17,11 @@ Programa criado para uso pessoal.
 
 <br>
 
-<p aling="center">
+<p align="center">
 <img alt="" src="https://blog.codapp.com.br/wp-content/uploads/2024/07/1.jpg" width="100%">
 </p>
+
+<a id="tecnologias"></a>
 
 ## 🚀 Tecnologias
 
@@ -29,17 +31,22 @@ Esse projeto está sendo desenvolvido com as seguintes tecnologias:
 - Back-End: PHP e MySQL;
 - Backup: Git e Github.
 
+<a id="projeto"></a>
+
 ## 💻 Projeto
 
 Projeto para auxiliar o usuário em seu controle pessoal financeiro no cotidiano, facilitando registros, marcações e comparações sem grandes esforços para calcular e visualizar gráficamente os valores.
 
-##🔖 Layout
+<a id="layout"></a>
+
+## 🔖 Layout
 
 Baseado em um projeto de outra autoria, com autorização direta de outro desenvolvedor parceiro:
 
 <p>
 <a target="_blank" href="https://felipeprado200.github.io/Portifolio/">Figma</a>
 </p>
+<a id="licenca"></a>
 ## :memo: Licença
 
 © 2026 Michael Henrique Pedro Silva (Aurevo Global). Todos os direitos reservados.

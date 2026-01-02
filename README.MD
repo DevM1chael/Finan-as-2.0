@@ -44,7 +44,7 @@ Projeto para auxiliar o usuário em seu controle pessoal financeiro no cotidiano
 Baseado em um projeto de outra autoria, com autorização direta de outro desenvolvedor parceiro:
 
 <p>
-<a target="_blank" href="https://felipeprado200.github.io/Portifolio/">Figma</a>
+<a target="_blank" href="https://felipeprado200.github.io/Portifolio/">Felipe Prado</a>
 </p>
 <a id="licenca"></a>
 

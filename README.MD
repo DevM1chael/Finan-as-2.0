@@ -47,7 +47,8 @@ Baseado em um projeto de outra autoria, com autorização direta de outro desenv
 <a target="_blank" href="https://felipeprado200.github.io/Portifolio/">Figma</a>
 </p>
 <a id="licenca"></a>
-## :memo: Licença
+
+## 📝 Licença
 
 © 2026 Michael Henrique Pedro Silva (Aurevo Global). Todos os direitos reservados.
 

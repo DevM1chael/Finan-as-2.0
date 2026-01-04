@@ -1,0 +1,608 @@
+/* Aurevo Finance - estilo principal (responsivo e moderno) */
+html {
+  scroll-behavior: smooth;
+}
+:root {
+  --bg: #0f1724;
+  --card: #0b1220;
+  --muted: #9aa4b2;
+  --accent: #4f46e5;
+  --accent-2: #06b6d4;
+  --success: #10b981;
+  --danger: #ef4444;
+  --glass: rgba(255, 255, 255, 0.03);
+  --max-width: 1100px;
+  --radius: 12px;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI",
+    Roboto, "Helvetica Neue", Arial;
+}
+* {
+  box-sizing: border-box;
+}
+html,
+body {
+  height: 100%;
+  margin: 0;
+  background: linear-gradient(180deg, #071023 0%, #071422 100%);
+  color: #e6eef8;
+}
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+/* Header */
+.site-header {
+  backdrop-filter: blur(6px);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent);
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+}
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 0;
+}
+.brand .logo {
+  font-weight: 700;
+  color: #fff;
+  text-decoration: none;
+  font-size: 1.25rem;
+}
+.brand .logo .brand-finance {
+  color: var(--accent);
+  margin-left: 6px;
+}
+/* Logo sizing and spacing */
+.brand .logo {
+  font-size: 1.35rem;
+  display: inline-flex;
+  gap: 6px;
+  align-items: center;
+}
+.brand .logo .brand-aurevo {
+  font-weight: 800;
+}
+.site-nav {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+.site-nav a {
+  color: var(--muted);
+  text-decoration: none;
+  padding: 0.5rem 0.6rem;
+  border-radius: 8px;
+}
+.site-nav a:hover {
+  color: #fff;
+}
+.site-nav .btn {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  padding: 0.45rem 0.7rem;
+  border-radius: 8px;
+  color: #fff;
+}
+.btn.primary {
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  border: none;
+  text-decoration: none;
+  color: white;
+
+  padding: 10px 18px;
+  border-radius: 30px;
+
+  /* Interação suave */
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+}
+
+.btn.primary:hover {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+
+  /* deixa o gradiente levemente mais vivo */
+  filter: brightness(1.08);
+}
+
+/* Clique: sensação de pressão */
+.btn.primary:active {
+  transform: translateY(0) scale(0.98);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.btn.ghost {
+  /* ghost should be a subtle outlined button (not same as primary) */
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  text-decoration: none;
+  color: var(--muted);
+  padding: 10px;
+  border-radius: 30px;
+}
+
+/* Buttons - transitions, hover and focus for accessibility */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.16s ease, box-shadow 0.16s ease, opacity 0.12s ease;
+}
+.btn:focus {
+  outline: none;
+}
+.btn:focus-visible {
+  box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.12);
+  border-radius: 12px;
+}
+.btn.primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px rgba(79, 70, 229, 0.12);
+}
+.btn.primary:active {
+  transform: translateY(-1px);
+}
+.btn.ghost:hover {
+  background: rgba(255, 255, 255, 0.03);
+  border-color: rgba(255, 255, 255, 0.12);
+  color: #fff;
+}
+.btn.ghost:active {
+  transform: translateY(-1px);
+}
+
+.nav-toggle {
+  display: none;
+  background: transparent;
+  border: 0;
+  padding: 8px;
+  cursor: pointer;
+}
+.nav-toggle span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: #cbd5e1;
+  margin: 4px 0;
+  transition: 0.2s;
+}
+.nav-toggle.open span:nth-child(2) {
+  opacity: 0;
+}
+.nav-toggle.open span:nth-child(1) {
+  transform: translateY(6px) rotate(45deg);
+}
+.nav-toggle.open span:nth-child(3) {
+  transform: translateY(-6px) rotate(-45deg);
+}
+
+/* Theme toggle */
+.theme-toggle {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  color: var(--muted);
+  padding: 6px 8px;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-right: 12px;
+}
+.theme-toggle:hover {
+  color: #fff;
+}
+
+/* Theme icon styles */
+.theme-toggle .icon {
+  width: 18px;
+  height: 18px;
+  display: inline-block;
+  vertical-align: middle;
+  color: var(--muted);
+  transition: color 0.18s ease, opacity 0.18s ease, transform 0.12s ease;
+}
+.icon-sun {
+  display: none;
+}
+body.light-theme .icon-sun {
+  display: inline-block;
+}
+body.light-theme .icon-moon {
+  display: none;
+}
+.theme-toggle:focus-visible {
+  box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.08);
+}
+
+/* Hero */
+.hero {
+  position: relative;
+  padding: 5rem 0 3.5rem;
+}
+.hero-inner {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  align-items: center;
+  text-align: center;
+}
+.hero-content {
+  max-width: 780px;
+  margin: 0 auto;
+}
+.hero h2 {
+  font-size: 2.15rem;
+  margin: 0 0 0.6rem;
+  line-height: 1.08;
+  letter-spacing: -0.2px;
+}
+.hero p,
+.hero .lead {
+  color: var(--muted);
+  line-height: 1.7;
+  margin: 0 auto;
+  font-size: 1.05rem;
+}
+.hero-cta {
+  margin-top: 1rem;
+  display: flex;
+  gap: 0.75rem;
+  justify-content: center;
+}
+
+/* subtle decorative glow behind hero */
+.hero::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 6%;
+  width: 75%;
+  height: 320px;
+  background: radial-gradient(
+    closest-side,
+    rgba(79, 70, 229, 0.1),
+    transparent 40%
+  );
+  filter: blur(40px);
+  pointer-events: none;
+  opacity: 0.9;
+}
+
+/* small entrance animation */
+.hero-content {
+  opacity: 0;
+  transform: translateY(8px);
+  animation: heroIn 0.6s ease forwards 0.08s;
+}
+@keyframes heroIn {
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+/* Hero visual (frosted transparent card with animated chart) */
+.hero-visual {
+  display: flex;
+  justify-content: center;
+  margin-top: 1.5rem;
+}
+.hero-visual-card {
+  width: 700px;
+  max-width: 96%;
+  height: 280px; /* increased height for a taller visual */
+  padding: 1rem;
+  border-radius: 14px;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.012),
+    rgba(255, 255, 255, 0.005)
+  );
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.025);
+  box-shadow: 0 12px 46px rgba(2, 6, 23, 0.45);
+}
+.chart-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+.chart-line {
+  stroke-dasharray: 2000;
+  stroke-dashoffset: 2000;
+  /* slower, more natural easing */
+  animation: drawLine 6s cubic-bezier(0.22, 0.61, 0.36, 1) forwards 0.25s;
+}
+.chart-area {
+  opacity: 0;
+  fill-opacity: 0.07;
+  animation: fadeArea 4.5s cubic-bezier(0.2, 0.7, 0.2, 1) forwards 1.4s;
+}
+.chart-dots circle {
+  opacity: 0;
+  transform-origin: center;
+  transform: scale(0);
+  animation: popDot 0.5s cubic-bezier(0.2, 0.9, 0.25, 1) forwards;
+}
+.chart-dots circle:nth-child(1) {
+  animation-delay: 3.6s;
+}
+.chart-dots circle:nth-child(2) {
+  animation-delay: 3.8s;
+}
+.chart-dots circle:nth-child(3) {
+  animation-delay: 4s;
+}
+.chart-dots circle:nth-child(4) {
+  animation-delay: 4.2s;
+}
+.chart-dots circle:nth-child(5) {
+  animation-delay: 4.4s;
+}
+.chart-dots circle:nth-child(6) {
+  animation-delay: 4.6s;
+}
+.chart-dots circle:nth-child(7) {
+  animation-delay: 4.8s;
+}
+.chart-dots circle:nth-child(8) {
+  animation-delay: 5s;
+}
+.chart-dots circle:nth-child(9) {
+  animation-delay: 5.2s;
+}
+.chart-dots circle:nth-child(10) {
+  animation-delay: 5.4s;
+}
+
+@keyframes drawLine {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes fadeArea {
+  to {
+    opacity: 1;
+  }
+}
+@keyframes popDot {
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Light theme variant for the visual card */
+body.light-theme .hero-visual-card {
+  background: linear-gradient(
+    180deg,
+    rgba(11, 18, 32, 0.04),
+    rgba(11, 18, 32, 0.02)
+  );
+  border: 1px solid rgba(11, 18, 32, 0.06);
+}
+
+@media (max-width: 720px) {
+  .hero-visual-card {
+    height: auto;
+    padding: 0.75rem;
+  }
+  .chart-svg {
+    height: 140px;
+  }
+}
+@media (max-width: 520px) {
+  /* hide decorative chart on very small screens to avoid clutter */
+  .hero-visual {
+    display: none;
+  }
+}
+.card {
+  background: var(--card);
+  padding: 1.25rem;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(2, 6, 23, 0.6);
+}
+.card h3 {
+  margin: 0;
+  font-size: 1rem;
+}
+.card .large {
+  color: var(--muted);
+  margin-top: 6px;
+}
+.saldo {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0.5rem 0;
+  color: #fff;
+}
+
+/* Features */
+.features {
+  padding: 3rem 0;
+}
+.features .grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+.feature {
+  background: var(--glass);
+  background: var(--card);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  padding: 1rem;
+  border-radius: 10px;
+}
+.feature h4 {
+  margin: 0 0 0.5rem;
+}
+.feature p {
+  color: var(--muted);
+  margin: 0;
+}
+.feature:hover {
+  background: var(--card);
+  transform: translateY(-6px) scale(1.03);
+  box-shadow: 0 6px 20px rgba(2, 6, 23, 0.4);
+}
+
+/* Transactions table */
+.transactions {
+  padding: 3rem 0;
+}
+.table-wrap {
+  background: var(--card);
+  padding: 1rem;
+  border-radius: 10px;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  color: #e6eef8;
+}
+thead th {
+  color: var(--muted);
+  text-align: left;
+  padding: 0.75rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+}
+tbody td {
+  padding: 0.75rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.02);
+}
+.neg {
+  color: var(--danger);
+}
+.pos {
+  color: var(--success);
+}
+
+/* Footer */
+.site-footer {
+  border-top: 1px solid rgba(255, 255, 255, 0.03);
+  padding: 1.25rem 0;
+  margin-top: 2rem;
+}
+.footer-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+.footer-nav a {
+  color: var(--muted);
+  text-decoration: none;
+  margin-left: 1rem;
+}
+
+/* Light theme overrides */
+body.light-theme {
+  --bg: #f7fafc;
+  --card: #ffffff;
+  --muted: #6b7280;
+  --accent: #4f46e5;
+  --accent-2: #06b6d4;
+  --success: #10b981;
+  --danger: #dc2626;
+  --glass: rgba(2, 6, 23, 0.03);
+  color: #0b1220;
+  background: linear-gradient(180deg, #ffffff 0%, #f3f4f6 100%);
+}
+
+/* ensure elements visually adapt */
+body.light-theme .site-header {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.9),
+    rgba(255, 255, 255, 0.9)
+  );
+  border-bottom: 1px solid rgba(11, 18, 32, 0.04);
+}
+body.light-theme .site-nav a {
+  color: var(--muted);
+}
+body.light-theme .brand .logo {
+  color: #0b1220; /* make Aurevo visible on light background */
+}
+body.light-theme .brand .logo .brand-finance {
+  color: var(--accent); /* keep 'Finance' accented */
+}
+body.light-theme .theme-toggle {
+  color: #0b1220;
+  border-color: rgba(11, 18, 32, 0.08);
+}
+body.light-theme .card {
+  box-shadow: 0 6px 20px rgba(11, 18, 32, 0.04);
+}
+body.light-theme .site-footer {
+  border-top: 1px solid rgba(11, 18, 32, 0.04);
+}
+
+/* Button adjustments for light theme */
+body.light-theme .btn.ghost {
+  border: 1px solid rgba(11, 18, 32, 0.08);
+  color: var(--muted);
+  background: transparent;
+}
+body.light-theme .btn.primary {
+  /* ensure primary stays visible on light background */
+  color: #fff;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .hero-inner {
+    grid-template-columns: 1fr;
+  }
+  .hero-card {
+    order: 2;
+  }
+  .features .grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media (max-width: 640px) {
+  .container {
+    padding: 1rem;
+  }
+  .site-nav {
+    position: fixed;
+    right: 0;
+    top: 64px;
+    background: linear-gradient(
+      180deg,
+      rgba(7, 10, 20, 0.98),
+      rgba(7, 10, 20, 0.98)
+    );
+    height: calc(100% - 64px);
+    width: 220px;
+    transform: translateX(110%);
+    transition: transform 0.22s;
+    padding: 1rem;
+    flex-direction: column;
+  }
+  .site-nav.open {
+    transform: translateX(0);
+  }
+  .nav-toggle {
+    display: block;
+  }
+  .site-nav a {
+    padding: 0.6rem 0;
+  }
+  .features .grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Utility */
+.large {
+  font-size: 0.9rem;
+}
+.muted {
+  color: var(--muted);
+}

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Cadastro — Aurevo Finance</title>
+    <link rel="stylesheet" href="../assets/style.css" />
+  </head>
+  <body>
+    <main class="container" style="max-width: 540px; margin: 3.5rem auto">
+      <a href="../index.html" style="text-decoration: none; color: inherit"
+        >← Voltar</a
+      >
+      <div class="card" style="margin-top: 1rem">
+        <h2>Criar conta</h2>
+        <form
+          action="#"
+          method="post"
+          style="display: grid; gap: 0.75rem; margin-top: 0.75rem"
+        >
+          <label>
+            <span class="muted">Nome completo</span>
+            <input
+              type="text"
+              name="name"
+              required
+              style="
+                width: 100%;
+                padding: 0.6rem;
+                border-radius: 8px;
+                border: 1px solid rgba(0, 0, 0, 0.06);
+              "
+            />
+          </label>
+          <label>
+            <span class="muted">E-mail</span>
+            <input
+              type="email"
+              name="email"
+              required
+              style="
+                width: 100%;
+                padding: 0.6rem;
+                border-radius: 8px;
+                border: 1px solid rgba(0, 0, 0, 0.06);
+              "
+            />
+          </label>
+          <label>
+            <span class="muted">Senha</span>
+            <input
+              type="password"
+              name="password"
+              required
+              style="
+                width: 100%;
+                padding: 0.6rem;
+                border-radius: 8px;
+                border: 1px solid rgba(0, 0, 0, 0.06);
+              "
+            />
+          </label>
+          <div style="display: flex; gap: 0.5rem; margin-top: 0.5rem">
+            <button class="btn primary" type="submit" style="flex: 1">
+              Criar conta
+            </button>
+          </div>
+        </form>
+      </div>
+    </main>
+  </body>
+</html>

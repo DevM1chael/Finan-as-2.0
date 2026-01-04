@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Aurevo - Controle</title>
+    <meta
+      name="description"
+      content="Sistema financeiro pessoal para controle de receitas e despesas."
+    />
+
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- CSS global -->
+    <link rel="stylesheet" href="../assets/style.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container header-inner">
+        <button
+          class="theme-toggle"
+          id="themeToggle"
+          aria-label="Alternar tema"
+          title="Alternar tema"
+          aria-pressed="false"
+        >
+          <!-- Moon icon (shown on dark theme) -->
+          <svg
+            class="icon icon-moon"
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            aria-hidden="true"
+          >
+            <path
+              d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"
+              fill="currentColor"
+            />
+          </svg>
+          <!-- Sun icon (shown on light theme) -->
+          <svg
+            class="icon icon-sun"
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            aria-hidden="true"
+          >
+            <path
+              d="M6.76 4.84l-1.8-1.79L3.17 4.83l1.79 1.8 1.8-1.79zM1 13h3v-2H1v2zm10 8h2v-3h-2v3zm7.03-3.03l1.79 1.8 1.79-1.79-1.8-1.8-1.78 1.79zM17 6.76l1.79-1.79-1.79-1.8-1.8 1.79L17 6.76zM23 11v2h-3v-2h3zM4.83 19.78l1.79-1.8-1.79-1.79-1.8 1.79 1.8 1.8zM12 6a6 6 0 100 12 6 6 0 000-12z"
+              fill="currentColor"
+            />
+          </svg>
+        </button>
+
+        <div class="brand">
+          <a href="index.html" class="logo"
+            ><span class="brand-aurevo">Aurevo</span
+            ><span class="brand-finance">Finance</span></a
+          >
+        </div>
+
+        <button class="nav-toggle" id="navToggle" aria-label="Abrir menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+
+        <nav class="site-nav" id="siteNav">
+          <a href="../index.html">Início</a>
+          <a href="#transactions">Transações</a>
+          <a href="./dashboard.html">Dashboard</a>
+          <a class="btn" href="../pages/login.html">Logout</a>
+        </nav>
+      </div>
+    </header>
+    
+    <!-- load site scripts (same as index) -->
+    <script src="../index.js"></script>
+  </body>
+</html>

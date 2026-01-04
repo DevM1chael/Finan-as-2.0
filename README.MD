@@ -28,7 +28,7 @@ Programa criado para uso pessoal.
 Esse projeto está sendo desenvolvido com as seguintes tecnologias:
 
 - Front-End: HTML, CSS e JS;
-- Back-End: PHP e MySQL;
+- Back-End: ReactJS e MySQL;
 - Backup: Git e Github.
 
 <a id="projeto"></a>

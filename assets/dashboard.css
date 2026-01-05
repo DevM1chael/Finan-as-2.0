@@ -39,21 +39,21 @@
   align-items: center;
 }
 .avatar {
-    width: 64px;
-    height: 64px;
-    border-radius: 50%;
-    display: inline-block;
-    flex: 0 0 64px;
-    object-fit: cover;
-    box-sizing: border-box;
-    /* fundo leve adaptável por tema */
-    background: var(--glass);
-    /* cor do ícone dentro do SVG (usa currentColor) */
-    color: var(--accent);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  display: inline-block;
+  flex: 0 0 64px;
+  object-fit: cover;
+  box-sizing: border-box;
+  /* fundo leve adaptável por tema */
+  background: var(--glass);
+  /* cor do ícone dentro do SVG (usa currentColor) */
+  color: var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
 }
 .user-info .welcome {
   font-size: 16px;
@@ -140,7 +140,7 @@ body:not(.light-theme) .avatar {
   background: var(--glass);
   color: var(--accent);
 }
-}
+
 body.light-theme .bills-count {
   background: linear-gradient(
     90deg,

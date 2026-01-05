@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128" role="img" aria-label="Avatar anônimo">
+  <!-- SVG usa currentColor para adaptar-se ao tema via CSS (.avatar { color: ... }) -->
+  <g transform="translate(16,12)" fill="none" stroke="none">
+    <circle cx="48" cy="52" r="48" fill="transparent" />
+    <!-- rosto/ícone principal usa currentColor -->
+    <g fill="currentColor">
+      <circle cx="48" cy="36" r="24" fill-opacity="1" />
+      <path d="M0 100c0-26.51 25.79-48 56.5-48S113 73.49 113 100H0z" fill-opacity="0.9" />
+    </g>
+  </g>
+</svg>

@@ -17,6 +17,7 @@
 
     <!-- CSS global -->
     <link rel="stylesheet" href="../assets/style.css" />
+    <link rel="stylesheet" href="../assets/dashboard.css" />
   </head>
   <body>
     <header class="site-header">
@@ -82,7 +83,68 @@
       </div>
     </header>
 
+    <!-- estilos do dashboard movidos para assets/dashboard.css -->
+
+    <section class="dashboard-layout" role="main" aria-label="Painel principal">
+      <aside class="panel left" aria-label="Painel esquerdo - navegação">
+        <div class="hud">
+          <div class="hud-top">
+            <img
+              src="../assets/avatar.svg"
+              alt="Foto do usuário"
+              class="avatar"
+            />
+            <div class="user-info">
+              <div class="welcome">
+                Bem-vindo, <span class="user-name">Usuário</span>!
+              </div>
+              <div class="logo-sm">Aurevo Finance</div>
+            </div>
+          </div>
+
+          <div class="bills-count" aria-live="polite">
+            <span><strong>0</strong> contas pendentes este mês</span>
+          </div>
+
+          <nav class="left-actions" aria-label="Ações rápidas">
+            <button class="btn" type="button">Registrar lembrete mensal</button>
+            <button class="btn" type="button">
+              Registrar lembrete trimestral
+            </button>
+            <button class="btn" type="button">Registrar lembrete anual</button>
+            <button class="btn" type="button">Registrar gastos do mês</button>
+            <button class="btn" type="button">Calendário</button>
+            <button class="btn" type="button">Análise gráfica</button>
+            <button class="btn" type="button">Desempenho financeiro</button>
+          </nav>
+        </div>
+      </aside>
+
+      <main class="panel center" aria-label="Conteúdo central">
+        <!-- Conteúdo principal do dashboard (gráficos, listas, etc.) -->
+      </main>
+
+      <aside class="panel right" aria-label="Painel direito">
+        <!-- Painel direito (resumo, insights, widgets) -->
+      </aside>
+    </section>
+
+    <!-- rodapé (igual ao index.html) -->
+    <footer class="site-footer" role="contentinfo" aria-label="Rodapé do site">
+      <div class="container footer-inner">
+        <p>
+          &copy; <span id="currentYear"></span> Aurevo Finance. Todos os
+          direitos reservados.
+        </p>
+        <nav class="footer-nav">
+          <a href="#privacy">Política de Privacidade</a>
+          <a href="#contact">Contato</a>
+        </nav>
+      </div>
+    </footer>
+
     <!-- load site scripts (same as index) -->
     <script src="../index.js"></script>
+    <script src="../assets/dashboard.js"></script>
   </body>
 </html>

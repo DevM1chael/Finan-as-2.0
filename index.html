@@ -173,9 +173,12 @@
       <!-- transactions removed from homepage: moved to a dedicated dashboard page when user is logged in -->
     </main>
 
-    <footer class="site-footer">
+    <footer class="site-footer" role="contentinfo" aria-label="Rodapé do site">
       <div class="container footer-inner">
-        <p>&copy; 2026 Aurevo Finance. Todos os direitos reservados.</p>
+        <p>
+          &copy; <span id="currentYear"></span> Aurevo Finance. Todos os
+          direitos reservados.
+        </p>
         <nav class="footer-nav">
           <a href="#privacy">Política de Privacidade</a>
           <a href="#contact">Contato</a>

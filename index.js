@@ -33,3 +33,19 @@ themeToggle &&
     applyTheme(next)
     localStorage.setItem(THEME_KEY, next)
   })
+
+// seta o ano do rodapé dinamicamente (se houver elemento com id `currentYear`)
+function setFooterYear() {
+  try {
+    const el = document.getElementById("currentYear")
+    if (el) el.textContent = new Date().getFullYear()
+  } catch (e) {
+    /* ignore */
+  }
+}
+
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", () => setFooterYear())
+} else {
+  setFooterYear()
+}

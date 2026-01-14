@@ -83,7 +83,114 @@
       </div>
     </header>
 
-    <!-- estilos do dashboard movidos para assets/dashboard.css -->
+    <!--
+      Seção 1 — RESUMO FINANCEIRO
+      ---------------------------------------------------------------
+      Objetivo: mostrar, logo abaixo do header, um conjunto de cards
+      resumindo o estado financeiro (saldo, receitas, despesas, contas).
+
+      Por que aqui: ao carregar o dashboard, o usuário deve ver a informação
+      mais importante imediatamente — por isso colocamos estes cards no topo
+      do conteúdo principal.
+
+      Observações de integração futura:
+      - Cada card tem um atributo data-key que mapeia para a propriedade do
+        objeto que o backend (Node + SQLite) irá retornar, por exemplo:
+          { balance, incomeMonth, expenseMonth, pendingBills }
+      - No futuro, um fetch('/api/summary') preencherá esses cards.
+    -->
+
+    <section class="container" aria-label="Resumo financeiro">
+      <div class="summary-grid">
+        <!--
+          Card: Saldo atual
+          - mostra o saldo consolidado (entradas - saídas)
+          - uso de SVG inline para ícone (sem dependências externas)
+        -->
+        <article
+          class="summary-card balance"
+          data-key="balance"
+          aria-hidden="false"
+        >
+          <div class="card-head">
+            <svg
+              class="icon"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <path
+                fill="currentColor"
+                d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"
+              />
+            </svg>
+            <span class="muted">Saldo atual</span>
+          </div>
+          <div class="card-value">R$ <span class="value">0,00</span></div>
+          <div class="card-meta muted">
+            Última atualização: <small class="meta-time">agora</small>
+          </div>
+        </article>
+
+        <!-- Receita do mês -->
+        <article class="summary-card income" data-key="incomeMonth">
+          <div class="card-head">
+            <svg
+              class="icon"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <path
+                fill="currentColor"
+                d="M12 2L2 7l10 5 10-5-10-5zm0 7.5L5.21 7 12 4.5 18.79 7 12 9.5zM2 17l10 5 10-5v-2l-10 5-10-5v2z"
+              />
+            </svg>
+            <span class="muted">Receitas (mês)</span>
+          </div>
+          <div class="card-value">R$ <span class="value">0,00</span></div>
+        </article>
+
+        <!-- Despesa do mês -->
+        <article class="summary-card expense" data-key="expenseMonth">
+          <div class="card-head">
+            <svg
+              class="icon"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <path fill="currentColor" d="M12 21l9-5V6l-9 5-9-5v10l9 5z" />
+            </svg>
+            <span class="muted">Despesas (mês)</span>
+          </div>
+          <div class="card-value">R$ <span class="value">0,00</span></div>
+        </article>
+
+        <!-- Contas pendentes -->
+        <article class="summary-card pending" data-key="pendingBills">
+          <div class="card-head">
+            <svg
+              class="icon"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <path
+                fill="currentColor"
+                d="M3 3h18v2H3V3zm0 4h18v14H3V7zm2 2v10h14V9H5z"
+              />
+            </svg>
+            <span class="muted">Contas pendentes</span>
+          </div>
+          <div class="card-value"><span class="value">0</span></div>
+        </article>
+      </div>
+    </section>
 
     <section class="dashboard-layout" role="main" aria-label="Painel principal">
       <aside class="panel left" aria-label="Painel esquerdo - navegação">
@@ -121,11 +228,252 @@
       </aside>
 
       <main class="panel center" aria-label="Conteúdo central">
-        <!-- Conteúdo principal do dashboard (gráficos, listas, etc.) -->
+        <!--
+          Área Principal - Gráfico Visual
+          ---------------------------------------------------------------
+          Esta área exibe um gráfico de linhas simples (SVG) com dados
+          fictícios de receita/despesa ao longo dos meses.
+
+          Por que: o gráfico dá ao usuário uma visão rápida de tendê  ncia.
+          Como será integrado: futuramente o backend (Node + SQLite)
+          fornecerá os dados via endpoint (ex: GET /api/chart-monthly)
+          e o código JS fará fetch() para atualizar a visualização.
+        -->
+
+        <section class="chart-card" aria-label="Gráfico de desempenho">
+          <header class="chart-header">
+            <h3>Desempenho mensal</h3>
+            <p class="muted">Receitas vs Despesas (últimos 12 meses)</p>
+          </header>
+
+          <!--
+            SVG responsivo: largura 100%, viewBox controlando coordenadas internas.
+            Os pontos são plotados via JS (função renderDashboardChart) para
+            facilitar futuras integrações com dados reais.
+          -->
+          <div class="chart-wrap">
+            <svg
+              class="chart-svg"
+              viewBox="0 0 600 300"
+              preserveAspectRatio="none"
+              aria-hidden="false"
+            >
+              <defs>
+                <linearGradient id="lineGradientIncome" x1="0" x2="1">
+                  <stop offset="0%" stop-color="var(--accent)" />
+                  <stop offset="100%" stop-color="var(--accent-2)" />
+                </linearGradient>
+                <linearGradient id="lineGradientExpense" x1="0" x2="1">
+                  <stop offset="0%" stop-color="#ef4444" />
+                  <stop offset="100%" stop-color="#fb7185" />
+                </linearGradient>
+              </defs>
+              <!-- area preenchida (será atualizada pelo JS) -->
+              <path
+                class="chart-area-income"
+                fill="url(#lineGradientIncome)"
+                opacity="0.08"
+              ></path>
+              <path
+                class="chart-area-expense"
+                fill="url(#lineGradientExpense)"
+                opacity="0.06"
+              ></path>
+              <!-- linhas -->
+              <path
+                class="chart-line-income"
+                stroke="url(#lineGradientIncome)"
+                stroke-width="3"
+                fill="none"
+              ></path>
+              <path
+                class="chart-line-expense"
+                stroke="url(#lineGradientExpense)"
+                stroke-width="3"
+                fill="none"
+              ></path>
+              <!-- pontos (circles) serão criados pelo JS -->
+              <g class="chart-dots-income"></g>
+              <g class="chart-dots-expense"></g>
+            </svg>
+            <!-- tooltip simples (posicionado via JS) -->
+            <div class="chart-tooltip" role="tooltip" aria-hidden="true"></div>
+          </div>
+
+          <div class="chart-legend">
+            <span
+              ><svg width="10" height="6">
+                <rect width="10" height="6" fill="url(#lineGradientIncome)" />
+              </svg>
+              Receitas</span
+            >
+            <span
+              ><svg width="10" height="6">
+                <rect width="10" height="6" fill="#ef4444" />
+              </svg>
+              Despesas</span
+            >
+          </div>
+        </section>
+
+        <!--
+          Seção 4 — Tabela de Transações
+          ---------------------------------------------------------------
+          Mostra as transações recentes em formato tabular. Cada linha é
+          um registro (fictício) que, no futuro, será retornado pelo backend
+          (GET /api/transactions). O código JS atual gera dados fictícios e
+          adiciona handlers para ações (visualizar, deletar) — tudo simulado.
+        -->
+
+        <section class="transactions-card" aria-label="Transações recentes">
+          <header class="transactions-header">
+            <h3>Transações recentes</h3>
+            <div class="transactions-controls">
+              <label class="muted"
+                >Filtrar:
+                <select id="txFilter">
+                  <option value="all">Todos</option>
+                  <option value="income">Entradas</option>
+                  <option value="expense">Saídas</option>
+                </select>
+              </label>
+            </div>
+          </header>
+
+          <div class="table-wrap">
+            <table class="transactions-table" aria-describedby="tx-desc">
+              <caption id="tx-desc" class="sr-only">
+                Lista de transações recentes
+              </caption>
+              <thead>
+                <tr>
+                  <th scope="col">Data</th>
+                  <th scope="col">Descrição</th>
+                  <th scope="col">Categoria</th>
+                  <th scope="col">Tipo</th>
+                  <th scope="col">Valor</th>
+                  <th scope="col">Ações</th>
+                </tr>
+              </thead>
+              <tbody class="transactions-body">
+                <!-- linhas preenchidas via JS (populateTransactions) -->
+              </tbody>
+            </table>
+          </div>
+        </section>
       </main>
 
       <aside class="panel right" aria-label="Painel direito">
-        <!-- Painel direito (resumo, insights, widgets) -->
+        <!--
+          Coluna de Ações Rápidas
+          ---------------------------------------------------------------
+          Objetivo: fornecer ações e widgets que o usuário pode acessar
+          rapidamente sem sair do contexto do dashboard.
+
+          - Botões com data-action: ligados a handlers JS (sem submit/POST)
+          - Lista de lembretes/insights compacta
+          - Projetado para escalar: cada botão pode abrir um modal/component
+            quando migrarmos para React.
+        -->
+
+        <section class="quick-actions" aria-label="Ações rápidas">
+          <header class="qa-header">
+            <h4>Ações rápidas</h4>
+            <p class="muted">Atalhos para tarefas frequentes</p>
+          </header>
+
+          <div class="qa-grid">
+            <button
+              class="quick-btn"
+              data-action="add-transaction"
+              title="Adicionar transação"
+            >
+              <!-- ícone + label -->
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <path
+                  fill="currentColor"
+                  d="M11 11V6h2v5h5v2h-5v5h-2v-5H6v-2h5z"
+                />
+              </svg>
+              <span>Adicionar</span>
+            </button>
+
+            <button
+              class="quick-btn"
+              data-action="add-reminder"
+              title="Registrar lembrete"
+            >
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <path
+                  fill="currentColor"
+                  d="M7 10h10v2H7v-2zm0 4h7v2H7v-2zM5 3h14v2H5V3z"
+                />
+              </svg>
+              <span>Lembrete</span>
+            </button>
+
+            <button
+              class="quick-btn"
+              data-action="view-bills"
+              title="Ver contas pendentes"
+            >
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <path fill="currentColor" d="M3 3h18v2H3V3zm0 6h18v12H3V9z" />
+              </svg>
+              <span>Contas</span>
+            </button>
+
+            <button
+              class="quick-btn"
+              data-action="export-csv"
+              title="Exportar CSV"
+            >
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <path
+                  fill="currentColor"
+                  d="M5 20h14v-2H5v2zm7-18L5 9h4v6h6V9h4L12 2z"
+                />
+              </svg>
+              <span>Exportar</span>
+            </button>
+          </div>
+
+          <div class="qa-widgets">
+            <div class="widget reminders">
+              <h5>Lembretes</h5>
+              <ul class="reminders-list">
+                <!-- itens fictícios; futuramente gerados pelo backend -->
+                <li><strong>Conta Luz</strong> — vence em 3 dias</li>
+                <li><strong>Assinatura</strong> — vence em 7 dias</li>
+              </ul>
+            </div>
+
+            <div class="widget quick-summary">
+              <h5>Resumo rápido</h5>
+              <p class="muted">Receita média: R$ <strong>2.000</strong></p>
+            </div>
+          </div>
+        </section>
       </aside>
     </section>
 

@@ -247,8 +247,9 @@ function attachQuickActions() {
       switch (action) {
         case "add-transaction":
           // abre o modal de adicionar transação (se implementado)
-          if (typeof openTxModal === 'function') openTxModal()
-          else showQuickToast("Abrir formulário: adicionar transação (simulado)")
+          if (typeof openTxModal === "function") openTxModal()
+          else
+            showQuickToast("Abrir formulário: adicionar transação (simulado)")
           break
         case "add-reminder":
           showQuickToast("Registrar lembrete (simulado)")
@@ -437,38 +438,38 @@ function renderDashboardChart(data) {
 --------------------------------------------------------------- */
 
 function addTransactionRow(tx, prepend = false) {
-  const tbody = document.querySelector('.transactions-body')
+  const tbody = document.querySelector(".transactions-body")
   if (!tbody) return
 
-  const tr = document.createElement('tr')
-  tr.setAttribute('data-id', tx.id)
+  const tr = document.createElement("tr")
+  tr.setAttribute("data-id", tx.id)
 
-  const tdDate = document.createElement('td')
+  const tdDate = document.createElement("td")
   tdDate.textContent = formatDateBR(tx.date)
 
-  const tdDesc = document.createElement('td')
+  const tdDesc = document.createElement("td")
   tdDesc.textContent = tx.desc
 
-  const tdCat = document.createElement('td')
+  const tdCat = document.createElement("td")
   tdCat.textContent = tx.category
 
-  const tdType = document.createElement('td')
-  tdType.textContent = tx.type === 'income' ? 'Entrada' : 'Saída'
+  const tdType = document.createElement("td")
+  tdType.textContent = tx.type === "income" ? "Entrada" : "Saída"
 
-  const tdVal = document.createElement('td')
-  tdVal.className = tx.type === 'income' ? 'pos' : 'neg'
+  const tdVal = document.createElement("td")
+  tdVal.className = tx.type === "income" ? "pos" : "neg"
   tdVal.textContent = formatCurrencyBR(tx.value)
 
-  const tdActions = document.createElement('td')
-  tdActions.className = 'tx-actions'
-  const btnView = document.createElement('button')
-  btnView.className = 'btn small'
-  btnView.textContent = 'Ver'
-  btnView.setAttribute('data-action', 'view')
-  const btnDel = document.createElement('button')
-  btnDel.className = 'btn small'
-  btnDel.textContent = 'Excluir'
-  btnDel.setAttribute('data-action', 'delete')
+  const tdActions = document.createElement("td")
+  tdActions.className = "tx-actions"
+  const btnView = document.createElement("button")
+  btnView.className = "btn small"
+  btnView.textContent = "Ver"
+  btnView.setAttribute("data-action", "view")
+  const btnDel = document.createElement("button")
+  btnDel.className = "btn small"
+  btnDel.textContent = "Excluir"
+  btnDel.setAttribute("data-action", "delete")
   tdActions.appendChild(btnView)
   tdActions.appendChild(btnDel)
 
@@ -495,8 +496,13 @@ function addTransaction(tx) {
   // insere linha na tabela
   addTransactionRow(tx, true)
   // atualiza sumário
-  const s = window.AurevoData.summary || { balance: 0, incomeMonth: 0, expenseMonth: 0, pendingBills: 0 }
-  if (tx.type === 'income') {
+  const s = window.AurevoData.summary || {
+    balance: 0,
+    incomeMonth: 0,
+    expenseMonth: 0,
+    pendingBills: 0,
+  }
+  if (tx.type === "income") {
     s.incomeMonth = (s.incomeMonth || 0) + Number(tx.value)
     s.balance = (s.balance || 0) + Number(tx.value)
   } else {
@@ -508,46 +514,55 @@ function addTransaction(tx) {
 }
 
 function openTxModal() {
-  const modal = document.getElementById('txModal')
-  const form = document.getElementById('txForm')
+  const modal = document.getElementById("txModal")
+  const form = document.getElementById("txForm")
   if (!modal || !form) return
   form.reset()
   // preenche data com hoje
-  const dateInput = document.getElementById('txDate')
+  const dateInput = document.getElementById("txDate")
   if (dateInput) dateInput.value = new Date().toISOString().slice(0, 10)
-  modal.classList.add('show')
-  modal.setAttribute('aria-hidden', 'false')
+  modal.classList.add("show")
+  modal.setAttribute("aria-hidden", "false")
   // foco inicial
-  const first = document.getElementById('txDesc')
+  const first = document.getElementById("txDesc")
   if (first) first.focus()
 }
 
 function closeTxModal() {
-  const modal = document.getElementById('txModal')
+  const modal = document.getElementById("txModal")
   if (!modal) return
-  modal.classList.remove('show')
-  modal.setAttribute('aria-hidden', 'true')
+  modal.classList.remove("show")
+  modal.setAttribute("aria-hidden", "true")
 }
 
 function attachModalHandlers() {
-  const modal = document.getElementById('txModal')
-  const form = document.getElementById('txForm')
+  const modal = document.getElementById("txModal")
+  const form = document.getElementById("txForm")
   if (!modal || !form) return
 
   // close buttons
-  modal.querySelectorAll('.modal-close').forEach((btn) => btn.addEventListener('click', closeTxModal))
+  modal
+    .querySelectorAll(".modal-close")
+    .forEach((btn) => btn.addEventListener("click", closeTxModal))
 
-  form.addEventListener('submit', (e) => {
+  form.addEventListener("submit", (e) => {
     e.preventDefault()
-    const date = document.getElementById('txDate').value
-    const desc = document.getElementById('txDesc').value.trim()
-    const category = document.getElementById('txCategory').value.trim()
-    const type = document.getElementById('txType').value
-    const value = parseFloat(document.getElementById('txValue').value)
+    const date = document.getElementById("txDate").value
+    const desc = document.getElementById("txDesc").value.trim()
+    const category = document.getElementById("txCategory").value.trim()
+    const type = document.getElementById("txType").value
+    const value = parseFloat(document.getElementById("txValue").value)
 
     // validações simples
-    if (!desc || !category || !date || !type || Number.isNaN(value) || value <= 0) {
-      showQuickToast('Preencha todos os campos corretamente')
+    if (
+      !desc ||
+      !category ||
+      !date ||
+      !type ||
+      Number.isNaN(value) ||
+      value <= 0
+    ) {
+      showQuickToast("Preencha todos os campos corretamente")
       return
     }
 
@@ -561,15 +576,15 @@ function attachModalHandlers() {
     }
 
     addTransaction(tx)
-    showQuickToast('Transação adicionada (simulado)')
+    showQuickToast("Transação adicionada (simulado)")
     closeTxModal()
   })
 }
 
 function attachAddTxButton() {
-  const btn = document.getElementById('addTxBtn')
+  const btn = document.getElementById("addTxBtn")
   if (!btn) return
-  btn.addEventListener('click', (e) => {
+  btn.addEventListener("click", (e) => {
     e.preventDefault()
     openTxModal()
   })
@@ -578,8 +593,8 @@ function attachAddTxButton() {
 // inicializações adicionais: modal handlers e botão de adicionar
 // Inicialização principal do dashboard: assegura que populadores e handlers
 // essenciais rodem quando o DOM estiver pronto.
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', () => {
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", () => {
     attachModalHandlers()
     attachAddTxButton()
     // preenche resumo, tabela de transações e anexa ações rápidas

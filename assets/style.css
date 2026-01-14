@@ -11,6 +11,19 @@ html {
   --success: #10b981;
   --danger: #ef4444;
   --glass: rgba(255, 255, 255, 0.03);
+  /* Core color tokens (dark theme defaults) */
+  --text: #e6eef8;
+  --text-inverse: #0b1220; /* used in light theme as main text */
+  --shadow-strong: rgba(2, 6, 23, 0.6);
+  --shadow-medium: rgba(2, 6, 23, 0.45);
+  --toast-bg: rgba(2, 6, 23, 0.95);
+  --toast-text: #ffffff;
+  --tooltip-bg: rgba(2, 6, 23, 0.9);
+  --modal-backdrop: rgba(2, 6, 23, 0.6);
+  --modal-shadow: rgba(2, 6, 23, 0.6);
+  --on-primary: #ffffff;
+  --pending: rgba(255, 209, 102, 0.9);
+  --faint: rgba(255, 255, 255, 0.01);
   --max-width: 1100px;
   --radius: 12px;
   font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI",
@@ -25,7 +38,7 @@ body {
   display: flex;
   flex-direction: column;
   background: linear-gradient(180deg, #071023 0%, #071422 100%);
-  color: #e6eef8;
+  color: var(--text);
 }
 
 main {
@@ -55,7 +68,7 @@ main {
 }
 .brand .logo {
   font-weight: 700;
-  color: #fff;
+  color: var(--text);
   text-decoration: none;
   font-size: 1.25rem;
 }
@@ -85,20 +98,20 @@ main {
   border-radius: 8px;
 }
 .site-nav a:hover {
-  color: #fff;
+  color: var(--text);
 }
 .site-nav .btn {
   background: transparent;
   border: 1px solid rgba(255, 255, 255, 0.06);
   padding: 0.45rem 0.7rem;
   border-radius: 8px;
-  color: #fff;
+  color: var(--text);
 }
 .btn.primary {
   background: linear-gradient(90deg, var(--accent), var(--accent-2));
   border: none;
   text-decoration: none;
-  color: white;
+  color: var(--on-primary);
 
   padding: 10px 18px;
   border-radius: 30px;
@@ -156,7 +169,7 @@ main {
 .btn.ghost:hover {
   background: rgba(255, 255, 255, 0.03);
   border-color: rgba(255, 255, 255, 0.12);
-  color: #fff;
+  color: var(--text);
 }
 .btn.ghost:active {
   transform: translateY(-1px);
@@ -198,7 +211,7 @@ main {
   margin-right: 12px;
 }
 .theme-toggle:hover {
-  color: #fff;
+  color: var(--text);
 }
 
 /* Theme icon styles */
@@ -310,6 +323,7 @@ body.light-theme .icon-moon {
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.025);
   box-shadow: 0 12px 46px rgba(2, 6, 23, 0.45);
+  box-shadow: 0 12px 46px var(--shadow-medium);
 }
 
 /* Dark mode: tornar o fundo do gráfico um pouco mais acinzentado */
@@ -420,7 +434,7 @@ body.light-theme .hero-visual-card {
   background: var(--card);
   padding: 1.25rem;
   border-radius: 12px;
-  box-shadow: 0 6px 20px rgba(2, 6, 23, 0.6);
+  box-shadow: 0 6px 20px var(--shadow-strong);
 }
 .card h3 {
   margin: 0;
@@ -434,7 +448,7 @@ body.light-theme .hero-visual-card {
   font-size: 1.5rem;
   font-weight: 700;
   margin: 0.5rem 0;
-  color: #fff;
+  color: var(--text);
 }
 
 /* Features */
@@ -463,7 +477,7 @@ body.light-theme .hero-visual-card {
 .feature:hover {
   background: var(--card);
   transform: translateY(-6px) scale(1.03);
-  box-shadow: 0 6px 20px rgba(2, 6, 23, 0.4);
+  box-shadow: 0 6px 20px var(--shadow-medium);
 }
 
 /* Transactions table */
@@ -478,7 +492,7 @@ body.light-theme .hero-visual-card {
 table {
   width: 100%;
   border-collapse: collapse;
-  color: #e6eef8;
+  color: var(--text);
 }
 thead th {
   color: var(--muted);
@@ -539,8 +553,15 @@ body.light-theme {
   --accent-2: #06b6d4;
   --success: #10b981;
   --danger: #dc2626;
-  --glass: rgba(2, 6, 23, 0.03);
-  color: #0b1220;
+  --glass: rgba(11, 18, 32, 0.03);
+  /* override core tokens for light theme */
+  --text: #0b1220;
+  --toast-bg: #ffffff;
+  --toast-text: #0b1220;
+  --tooltip-bg: #ffffff;
+  --modal-backdrop: rgba(11, 18, 32, 0.04);
+  --modal-shadow: rgba(11, 18, 32, 0.06);
+  color: var(--text);
   background: linear-gradient(180deg, #ffffff 0%, #f3f4f6 100%);
 }
 
@@ -581,7 +602,7 @@ body.light-theme .btn.ghost {
 }
 body.light-theme .btn.primary {
   /* ensure primary stays visible on light background */
-  color: #fff;
+  color: var(--on-primary);
 }
 
 /* Responsive */

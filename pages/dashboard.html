@@ -307,7 +307,9 @@
                 </select>
               </label>
               <!-- Botão visível para abrir o modal de adicionar transação -->
-              <button id="addTxBtn" class="btn primary" type="button">Adicionar transação</button>
+              <button id="addTxBtn" class="btn primary" type="button">
+                Adicionar transação
+              </button>
             </div>
           </header>
 
@@ -450,7 +452,13 @@
 
     <!-- rodapé (igual ao index.html) -->
     <!-- Modal: Adicionar Transação (marcado para ser usado pelo assets/dashboard.js) -->
-    <div id="txModal" class="modal" role="dialog" aria-hidden="true" aria-labelledby="txModalTitle">
+    <div
+      id="txModal"
+      class="modal"
+      role="dialog"
+      aria-hidden="true"
+      aria-labelledby="txModalTitle"
+    >
       <div class="modal-backdrop" aria-hidden="true"></div>
       <div class="modal-dialog">
         <header class="modal-head">
@@ -465,12 +473,24 @@
 
           <div class="form-row">
             <label for="txDesc">Descrição</label>
-            <input id="txDesc" name="desc" type="text" placeholder="Ex: Salário, Mercado" required />
+            <input
+              id="txDesc"
+              name="desc"
+              type="text"
+              placeholder="Ex: Salário, Mercado"
+              required
+            />
           </div>
 
           <div class="form-row">
             <label for="txCategory">Categoria</label>
-            <input id="txCategory" name="category" type="text" placeholder="Ex: Renda, Alimentação" required />
+            <input
+              id="txCategory"
+              name="category"
+              type="text"
+              placeholder="Ex: Renda, Alimentação"
+              required
+            />
           </div>
 
           <div class="form-row">
@@ -483,7 +503,15 @@
 
           <div class="form-row">
             <label for="txValue">Valor (R$)</label>
-            <input id="txValue" name="value" type="number" step="0.01" min="0.01" placeholder="0.00" required />
+            <input
+              id="txValue"
+              name="value"
+              type="number"
+              step="0.01"
+              min="0.01"
+              placeholder="0.00"
+              required
+            />
           </div>
 
           <div class="modal-actions">

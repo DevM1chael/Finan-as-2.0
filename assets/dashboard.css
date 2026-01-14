@@ -255,101 +255,17 @@
   box-shadow: 0 6px 18px rgba(2, 6, 23, 0.45);
   transition: background 0.2s ease, box-shadow 0.18s ease, transform 0.12s ease;
 }
-.panel.left {
-  flex: 0 0 300px; /* levemente menor que antes para dar mais ao centro */
-  min-width: 220px;
-}
 .panel.center {
+  /* Central panel agora ocupa a maior parte do espaço disponível
+     quando o painel esquerdo foi removido. */
   flex: 1 1 0%;
-  min-height: 520px; /* aumentar altura mínima para o conteúdo principal */
+  min-height: 520px; /* manter altura mínima confortável */
+  max-width: calc(100% - 340px); /* deixa espaço para a coluna direita */
 }
 .panel.right {
-  flex: 0 0 260px;
-  min-width: 200px;
-}
-
-/* HUD interno */
-.hud {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-}
-.hud-top {
-  display: flex;
-  gap: 12px;
-  align-items: center;
-}
-.avatar {
-  width: 64px;
-  height: 64px;
-  border-radius: 50%;
-  display: inline-block;
-  flex: 0 0 64px;
-  object-fit: cover;
-  box-sizing: border-box;
-  /* fundo leve adaptável por tema */
-  background: var(--glass);
-  /* cor do ícone dentro do SVG (usa currentColor) */
-  color: var(--accent);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-}
-.user-info .welcome {
-  font-size: 16px;
-  color: var(--muted);
-  margin-bottom: 4px;
-}
-.user-info .user-name {
-  font-weight: 700;
-  color: var(--accent);
-}
-.logo-sm {
-  font-size: 13px;
-  color: var(--muted);
-}
-
-.bills-count {
-  background: linear-gradient(
-    90deg,
-    rgba(249, 246, 236, 0.02),
-    rgba(255, 255, 255, 0.01)
-  );
-  border-radius: 8px;
-  padding: 10px;
-  color: var(--danger);
-  font-weight: 600;
-}
-
-.left-actions {
-  display: flex;
-  flex-direction: column;
-}
-.left-actions .btn {
-  display: block;
-  width: 100%;
-  text-align: left;
-  padding: 10px 12px;
-  border-radius: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.04);
-  background: transparent;
-  margin: 6px 0;
-  transition: transform 0.18s cubic-bezier(0.2, 0.9, 0.3, 1), background 0.18s,
-    box-shadow 0.18s;
-}
-.left-actions .btn:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 22px rgba(2, 6, 23, 0.45);
-  background: linear-gradient(90deg, var(--accent), var(--accent-2));
-  color: #fff;
-}
-.left-actions .btn:active {
-  transform: translateY(-1px);
-}
-.left-actions .btn:focus {
-  outline: none;
-  box-shadow: 0 0 0 6px rgba(79, 70, 229, 0.12);
+  /* Coluna direita um pouco mais larga para equilibrar o layout */
+  flex: 0 0 320px;
+  min-width: 260px;
 }
 
 /* responsivo: empilha colunas em telas pequenas */
@@ -357,38 +273,6 @@
   .dashboard-layout {
     flex-direction: column;
   }
-  .panel.left {
-    order: -1;
-  }
-}
-
-/* pequenas melhorias de acessibilidade */
-.left-actions .btn:focus {
-  outline: 2px solid rgba(79, 70, 229, 0.18);
-  outline-offset: 2px;
-}
-
-/* adaptação quando tema claro estiver ativado */
-body.light-theme .panel {
-  background: var(--card);
-  box-shadow: 0 6px 20px rgba(11, 18, 32, 0.04);
-}
-body.light-theme .avatar {
-  background: var(--glass);
-  color: var(--accent);
-}
-body:not(.light-theme) .avatar {
-  background: var(--glass);
-  color: var(--accent);
-}
-
-body.light-theme .bills-count {
-  background: linear-gradient(
-    90deg,
-    rgba(11, 18, 32, 0.02),
-    rgba(11, 18, 32, 0.01)
-  );
-  color: var(--danger);
 }
 
 /* small button modifier used in table action buttons */
@@ -397,6 +281,78 @@ body.light-theme .bills-count {
   border-radius: 8px;
   font-size: 0.85rem;
   margin-left: 6px;
+}
+
+/* Modal básico para adicionar transação (estilos leves) */
+.modal {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1200;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.18s ease;
+}
+.modal .modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(2, 6, 23, 0.6);
+  backdrop-filter: blur(2px);
+}
+.modal .modal-dialog {
+  position: relative;
+  width: 100%;
+  max-width: 520px;
+  background: var(--card);
+  border-radius: 12px;
+  padding: 14px;
+  box-shadow: 0 18px 40px rgba(2, 6, 23, 0.6);
+  transform: translateY(-6px);
+  pointer-events: auto;
+}
+.modal .modal-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+.modal .modal-close {
+  background: transparent;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+}
+.modal .modal-form .form-row {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+.modal .modal-form input,
+.modal .modal-form select {
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.04);
+  background: transparent;
+  color: inherit;
+}
+.modal .modal-actions {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+  margin-top: 6px;
+}
+.modal[aria-hidden="true"] {
+  visibility: hidden;
+  pointer-events: none;
+  opacity: 0;
+}
+.modal.show[aria-hidden="false"] {
+  visibility: visible;
+  pointer-events: auto;
+  opacity: 1;
 }
 
 /* ---------------------------------------------------------------
@@ -486,23 +442,16 @@ body.light-theme .bills-count {
   }
 }
 
-/* reduced motion respect */
+/* reduced motion respect: aplica-se apenas a painéis agora que
+   o painel esquerdo foi removido */
 @media (prefers-reduced-motion: reduce) {
-  .left-actions .btn,
   .panel {
     transition: none;
     animation: none;
   }
 }
 
-/* Ajustes de contraste e tamanhos para ambos os temas */
-.left-actions .btn {
-  font-size: 0.95rem;
-  padding: 12px 14px;
-}
-.panel.left {
-  padding: 18px;
-}
+/* Ajustes de padding para os painéis restantes */
 .panel.center {
   padding: 22px;
 }
@@ -510,43 +459,34 @@ body.light-theme .bills-count {
   padding: 16px;
 }
 
-/* aparência no modo escuro (padronizada usando variáveis) */
-body:not(.light-theme) .left-actions .btn {
-  border-color: rgba(255, 255, 255, 0.04);
-  color: #e6eef8;
+/* Light theme adjustments for dashboard-specific elements */
+body.light-theme .transactions-table {
+  color: inherit; /* usa a cor do body (escura) em vez do branco rígido */
 }
-body:not(.light-theme) .left-actions .btn:hover {
-  color: #fff;
+body.light-theme .transactions-table thead th {
+  border-bottom-color: rgba(11, 18, 32, 0.06);
+  color: var(--muted);
 }
-
-/* aparência no modo claro: garantir contraste e bordas mais escuras */
-body.light-theme .left-actions .btn {
+body.light-theme .transactions-table tbody td {
+  border-bottom-color: rgba(11, 18, 32, 0.04);
+}
+body.light-theme .transactions-controls select {
   border: 1px solid rgba(11, 18, 32, 0.06);
+  color: var(--muted);
+}
+body.light-theme .chart-tooltip {
+  background: #ffffff;
   color: #0b1220;
-  background: transparent;
+  box-shadow: 0 6px 18px rgba(11, 18, 32, 0.06);
 }
-body.light-theme .left-actions .btn:hover {
-  background: linear-gradient(90deg, var(--accent), var(--accent-2));
-  color: #fff;
-  box-shadow: 0 8px 18px rgba(11, 18, 32, 0.06);
+body.light-theme .qa-toast {
+  background: #ffffff;
+  color: #0b1220;
+  box-shadow: 0 8px 30px rgba(11, 18, 32, 0.06);
 }
-
-/* pressed state breve */
-.left-actions .btn.pressed {
-  transform: scale(0.98);
-  opacity: 0.95;
+body.light-theme .modal .modal-backdrop {
+  background: rgba(11, 18, 32, 0.04);
 }
-
-/* ajustar contagem de contas para melhor leitura em ambos os temas */
-.bills-count {
-  font-size: 0.98rem;
-  display: inline-block;
-}
-body.light-theme .bills-count {
-  background: linear-gradient(
-    90deg,
-    rgba(11, 18, 32, 0.02),
-    rgba(11, 18, 32, 0.01)
-  );
-  color: var(--danger);
+body.light-theme .modal .modal-dialog {
+  box-shadow: 0 12px 40px rgba(11, 18, 32, 0.06);
 }

@@ -1,52 +1,8 @@
-// Lógica leve da dashboard: atualizar contagem de contas e attach de botões
-;(function () {
-  // Nota: removi qualquer escrita/leitura em localStorage por segurança.
-  // A contagem de contas permanece como placeholder (0) até integração manual.
-  const billsEl = document.querySelector(".bills-count strong")
-
-  function refreshBills() {
-    const val = 0
-    if (billsEl) billsEl.textContent = val
-  }
-
-  // Attach click handlers aos botões do painel esquerdo (placeholders)
-  function attachActions() {
-    const buttons = document.querySelectorAll(".left-actions .btn")
-    buttons.forEach((btn) => {
-      btn.addEventListener("click", (e) => {
-        e.preventDefault()
-        const label = btn.textContent.trim()
-        console.info("[Dashboard] Ação:", label)
-        // Feedback visual breve
-        btn.classList.add("pressed")
-        setTimeout(() => btn.classList.remove("pressed"), 160)
-      })
-    })
-  }
-
-  // init quando DOM estiver pronto
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", () => {
-      refreshBills()
-      attachActions()
-      // popula os cards de resumo com dados fictícios (placeholder)
-      populateSummary()
-      // popula tabela de transações (dados fictícios)
-      populateTransactions()
-      // anexa handlers de ações rápidas (botões à direita)
-      attachQuickActions()
-    })
-  } else {
-    refreshBills()
-    attachActions()
-    populateSummary()
-    populateTransactions()
-    attachQuickActions()
-  }
-
-  // Expõe para debug / futuros usos
-  window.AurevoDashboard = { refreshBills }
-})()
+// Observação:
+// O painel esquerdo foi removido do layout. As funções/seletores
+// relacionados a esse painel foram limpos. A inicialização principal
+// do dashboard (população de summary, tabela e ações rápidas) está
+// consolidada mais abaixo e é executada quando o DOM estiver pronto.
 
 /*
   Funções auxiliares para a seção de Resumo Financeiro
@@ -159,6 +115,10 @@ function populateTransactions(data) {
       value: 120,
     },
   ]
+
+  // guarda lista no estado global para facilitar adições/removals posteriores
+  window.AurevoData = window.AurevoData || {}
+  window.AurevoData.transactions = fake
 
   const tbody = document.querySelector(".transactions-body")
   if (!tbody) return
@@ -286,7 +246,9 @@ function attachQuickActions() {
       // ações simuladas; no futuro, cada case chamará um componente/modal
       switch (action) {
         case "add-transaction":
-          showQuickToast("Abrir formulário: adicionar transação (simulado)")
+          // abre o modal de adicionar transação (se implementado)
+          if (typeof openTxModal === 'function') openTxModal()
+          else showQuickToast("Abrir formulário: adicionar transação (simulado)")
           break
         case "add-reminder":
           showQuickToast("Registrar lembrete (simulado)")
@@ -467,8 +429,174 @@ function renderDashboardChart(data) {
 }
 
 // executa o gráfico quando o DOM estiver pronto (se ainda não executado)
-if (document.readyState === "loading") {
-  document.addEventListener("DOMContentLoaded", () => renderDashboardChart())
+/* ---------------------------------------------------------------
+   Modal & adição de transações (formulário)
+   - cria funções para abrir/fechar modal, submeter formulário e
+     inserir a nova transação na tabela + atualizar resumo.
+   - implementado de forma imperativa para fácil migração a React.
+--------------------------------------------------------------- */
+
+function addTransactionRow(tx, prepend = false) {
+  const tbody = document.querySelector('.transactions-body')
+  if (!tbody) return
+
+  const tr = document.createElement('tr')
+  tr.setAttribute('data-id', tx.id)
+
+  const tdDate = document.createElement('td')
+  tdDate.textContent = formatDateBR(tx.date)
+
+  const tdDesc = document.createElement('td')
+  tdDesc.textContent = tx.desc
+
+  const tdCat = document.createElement('td')
+  tdCat.textContent = tx.category
+
+  const tdType = document.createElement('td')
+  tdType.textContent = tx.type === 'income' ? 'Entrada' : 'Saída'
+
+  const tdVal = document.createElement('td')
+  tdVal.className = tx.type === 'income' ? 'pos' : 'neg'
+  tdVal.textContent = formatCurrencyBR(tx.value)
+
+  const tdActions = document.createElement('td')
+  tdActions.className = 'tx-actions'
+  const btnView = document.createElement('button')
+  btnView.className = 'btn small'
+  btnView.textContent = 'Ver'
+  btnView.setAttribute('data-action', 'view')
+  const btnDel = document.createElement('button')
+  btnDel.className = 'btn small'
+  btnDel.textContent = 'Excluir'
+  btnDel.setAttribute('data-action', 'delete')
+  tdActions.appendChild(btnView)
+  tdActions.appendChild(btnDel)
+
+  tr.appendChild(tdDate)
+  tr.appendChild(tdDesc)
+  tr.appendChild(tdCat)
+  tr.appendChild(tdType)
+  tr.appendChild(tdVal)
+  tr.appendChild(tdActions)
+
+  if (prepend && tbody.firstChild) tbody.insertBefore(tr, tbody.firstChild)
+  else tbody.appendChild(tr)
+
+  // (re)anexa handlers apenas para os novos botões
+  attachTransactionActions()
+}
+
+function addTransaction(tx) {
+  // garante estado global
+  window.AurevoData = window.AurevoData || {}
+  window.AurevoData.transactions = window.AurevoData.transactions || []
+  // adiciona no topo (mais recente primeiro)
+  window.AurevoData.transactions.unshift(tx)
+  // insere linha na tabela
+  addTransactionRow(tx, true)
+  // atualiza sumário
+  const s = window.AurevoData.summary || { balance: 0, incomeMonth: 0, expenseMonth: 0, pendingBills: 0 }
+  if (tx.type === 'income') {
+    s.incomeMonth = (s.incomeMonth || 0) + Number(tx.value)
+    s.balance = (s.balance || 0) + Number(tx.value)
+  } else {
+    s.expenseMonth = (s.expenseMonth || 0) + Number(tx.value)
+    s.balance = (s.balance || 0) - Number(tx.value)
+  }
+  window.AurevoData.summary = s
+  updateSummaryDOM()
+}
+
+function openTxModal() {
+  const modal = document.getElementById('txModal')
+  const form = document.getElementById('txForm')
+  if (!modal || !form) return
+  form.reset()
+  // preenche data com hoje
+  const dateInput = document.getElementById('txDate')
+  if (dateInput) dateInput.value = new Date().toISOString().slice(0, 10)
+  modal.classList.add('show')
+  modal.setAttribute('aria-hidden', 'false')
+  // foco inicial
+  const first = document.getElementById('txDesc')
+  if (first) first.focus()
+}
+
+function closeTxModal() {
+  const modal = document.getElementById('txModal')
+  if (!modal) return
+  modal.classList.remove('show')
+  modal.setAttribute('aria-hidden', 'true')
+}
+
+function attachModalHandlers() {
+  const modal = document.getElementById('txModal')
+  const form = document.getElementById('txForm')
+  if (!modal || !form) return
+
+  // close buttons
+  modal.querySelectorAll('.modal-close').forEach((btn) => btn.addEventListener('click', closeTxModal))
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault()
+    const date = document.getElementById('txDate').value
+    const desc = document.getElementById('txDesc').value.trim()
+    const category = document.getElementById('txCategory').value.trim()
+    const type = document.getElementById('txType').value
+    const value = parseFloat(document.getElementById('txValue').value)
+
+    // validações simples
+    if (!desc || !category || !date || !type || Number.isNaN(value) || value <= 0) {
+      showQuickToast('Preencha todos os campos corretamente')
+      return
+    }
+
+    const tx = {
+      id: Date.now(),
+      date: date,
+      desc: desc,
+      category: category,
+      type: type,
+      value: value,
+    }
+
+    addTransaction(tx)
+    showQuickToast('Transação adicionada (simulado)')
+    closeTxModal()
+  })
+}
+
+function attachAddTxButton() {
+  const btn = document.getElementById('addTxBtn')
+  if (!btn) return
+  btn.addEventListener('click', (e) => {
+    e.preventDefault()
+    openTxModal()
+  })
+}
+
+// inicializações adicionais: modal handlers e botão de adicionar
+// Inicialização principal do dashboard: assegura que populadores e handlers
+// essenciais rodem quando o DOM estiver pronto.
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', () => {
+    attachModalHandlers()
+    attachAddTxButton()
+    // preenche resumo, tabela de transações e anexa ações rápidas
+    populateSummary()
+    populateTransactions()
+    attachQuickActions()
+    // renderiza o gráfico principal
+    renderDashboardChart()
+  })
 } else {
+  attachModalHandlers()
+  attachAddTxButton()
+  populateSummary()
+  populateTransactions()
+  attachQuickActions()
   renderDashboardChart()
 }
+
+// executa o gráfico quando o DOM estiver pronto (se ainda não executado)
+// (renderDashboardChart já é chamado na inicialização consolidada acima)

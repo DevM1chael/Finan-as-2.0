@@ -6,6 +6,11 @@
   margin: 16px auto; /* reduzir margem superior */
   padding: 0 12px; /* reduzir padding nas bordas */
   box-sizing: border-box;
+  /* faz o layout do dashboard crescer para preencher o espaço vertical
+     restante entre header e footer quando o <body> usa display:flex;
+     isso evita que o footer apresente comportamento visual diferente
+     entre a homepage e o dashboard. */
+  flex: 1 1 auto;
 }
 .panel {
   background: var(--card);

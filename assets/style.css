@@ -21,11 +21,17 @@ html {
 }
 html,
 body {
-  height: 100%;
-  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
   background: linear-gradient(180deg, #071023 0%, #071422 100%);
   color: #e6eef8;
 }
+
+main {
+  flex: 1;
+}
+
 .container {
   max-width: var(--max-width);
   margin: 0 auto;
@@ -494,8 +500,8 @@ tbody td {
 /* Footer */
 .site-footer {
   border-top: 1px solid rgba(255, 255, 255, 0.03);
-  padding: 0.6rem 0; /* reduzido para ocupar menos espaço */
-  margin-top: 1.25rem;
+  margin-top: 0; /* remove empurrão */
+  padding: 0.4rem 0; /* mantém fino */
 }
 .footer-inner {
   display: flex;
@@ -504,10 +510,25 @@ tbody td {
   gap: 0.75rem;
   font-size: 0.92rem; /* leve redução do tamanho do texto no rodapé */
 }
+
+.footer-container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0.4rem 2rem;
+}
+
 .footer-nav a {
   color: var(--muted);
   text-decoration: none;
   margin-left: 1rem;
+}
+
+.site-footer {
+  /* debug background removed (was left red for identification).
+     Keep footer background transparent so the centered .footer-container
+     controls padding/width. If you want a subtle bar, set a suitable
+     color or gradient here. */
+  background: transparent;
 }
 
 /* Light theme overrides */

@@ -514,7 +514,7 @@ tbody td {
 .footer-container {
   max-width: var(--max-width);
   margin: 0 auto;
-  padding: 0.4rem 2rem;
+  padding: 0.6rem 2rem; /* padding mais compacto e consistente */
 }
 
 .footer-nav a {
@@ -524,11 +524,10 @@ tbody td {
 }
 
 .site-footer {
-  /* debug background removed (was left red for identification).
-     Keep footer background transparent so the centered .footer-container
-     controls padding/width. If you want a subtle bar, set a suitable
-     color or gradient here. */
-  background: transparent;
+  /* visual discreto: pequena faixa sutil sobre o fundo. Mantemos borda
+     superior e um leve gradiente para separar do conteúdo. */
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.015), transparent);
+  padding: 0.6rem 0; /* reforça padding vertical curto */
 }
 
 /* Light theme overrides */

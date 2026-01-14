@@ -37,8 +37,15 @@ themeToggle &&
 // seta o ano do rodapé dinamicamente (se houver elemento com id `currentYear`)
 function setFooterYear() {
   try {
-    const el = document.getElementById("currentYear")
-    if (el) el.textContent = new Date().getFullYear()
+    const year = new Date().getFullYear()
+    // preenche todos os elementos que usam o data-attribute
+    const els = document.querySelectorAll("[data-current-year]")
+    if (els && els.length) {
+      els.forEach((el) => (el.textContent = year))
+    }
+    // compatibilidade retroativa: se existir um elemento com id currentYear
+    const fallback = document.getElementById("currentYear")
+    if (fallback) fallback.textContent = year
   } catch (e) {
     /* ignore */
   }

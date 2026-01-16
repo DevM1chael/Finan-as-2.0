@@ -1,0 +1,64 @@
+/**
+ * @file css/layout/_footer.css
+ * @description Estilos do footer
+ */
+
+.site-footer {
+  border-top: 1px solid rgba(255, 255, 255, 0.03);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.015), transparent);
+  padding: 0.6rem 0;
+  margin-top: 0;
+}
+
+.footer-container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0.6rem var(--spacing-container);
+}
+
+.footer-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: var(--font-size-sm);
+}
+
+.footer-inner p {
+  margin: 0;
+  color: var(--color-text-secondary);
+}
+
+.footer-nav {
+  display: flex;
+  gap: var(--space-md);
+}
+
+.footer-nav a {
+  color: var(--color-text-secondary);
+  text-decoration: none;
+  transition: color var(--transition-normal);
+}
+
+.footer-nav a:hover {
+  color: var(--color-text-primary);
+}
+
+/* Light Theme */
+body.light-theme .site-footer {
+  border-top-color: rgba(11, 18, 32, 0.04);
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .footer-inner {
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .footer-nav {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--space-sm);
+  }
+}

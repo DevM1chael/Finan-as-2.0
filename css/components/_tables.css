@@ -1,0 +1,91 @@
+/**
+ * @file css/components/_tables.css
+ * @description Estilos de tabelas
+ */
+
+.table-wrap {
+  background: var(--color-card);
+  padding: var(--space-md);
+  border-radius: var(--radius-md);
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  color: var(--color-text-primary);
+}
+
+thead {
+  background: var(--color-glass);
+}
+
+thead th {
+  color: var(--color-text-secondary);
+  text-align: left;
+  padding: 0.75rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-sm);
+}
+
+tbody td {
+  padding: 0.75rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.02);
+}
+
+tbody tr:hover {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+/* Text color variants */
+.pos {
+  color: var(--color-success);
+  font-weight: var(--font-weight-medium);
+}
+
+.neg {
+  color: var(--color-danger);
+  font-weight: var(--font-weight-medium);
+}
+
+/* Actions column */
+.tx-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.tx-actions .btn {
+  padding: 0.4rem 0.6rem;
+  font-size: 0.875rem;
+}
+
+/* Light Theme */
+body.light-theme .table-wrap {
+  box-shadow: 0 2px 8px rgba(11, 18, 32, 0.04);
+}
+
+body.light-theme thead {
+  background: rgba(11, 18, 32, 0.02);
+}
+
+body.light-theme tbody tr:hover {
+  background: rgba(11, 18, 32, 0.02);
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .table-wrap {
+    padding: var(--space-sm);
+  }
+
+  thead th {
+    padding: 0.5rem;
+    font-size: 0.75rem;
+  }
+
+  tbody td {
+    padding: 0.5rem;
+    font-size: 0.875rem;
+  }
+}

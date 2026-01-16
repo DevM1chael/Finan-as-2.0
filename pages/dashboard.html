@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-br">
   <head>
     <meta charset="UTF-8" />
@@ -15,9 +15,8 @@
       rel="stylesheet"
     />
 
-    <!-- CSS global -->
-    <link rel="stylesheet" href="../assets/style.css" />
-    <link rel="stylesheet" href="../assets/dashboard.css" />
+    <!-- CSS global (v2.0 - Refatorado) -->
+    <link rel="stylesheet" href="../css/main.css" />
   </head>
   <body>
     <header class="site-header">
@@ -534,8 +533,8 @@
       </div>
     </footer>
 
-    <!-- load site scripts (same as index) -->
-    <script src="../index.js"></script>
-    <script src="../assets/dashboard.js"></script>
+    <!-- load site scripts (v2.0 - Modular) -->
+    <script type="module" src="../index.js"></script>
+    <script type="module" src="../assets/dashboard.js"></script>
   </body>
 </html>

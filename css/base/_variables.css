@@ -1,0 +1,97 @@
+/**
+ * @file css/base/_variables.css
+ * @description Variáveis CSS globais (tokens de design)
+ * Tokens: cores, tipografia, espaçamento, etc.
+ */
+
+:root {
+  /* Color Palette - Dark Theme (Default) */
+  --color-bg-primary: #0f1724;
+  --color-bg-secondary: #071023;
+  --color-card: #0b1220;
+  --color-text-primary: #e6eef8;
+  --color-text-secondary: #9aa4b2;
+
+  /* Semantic Colors */
+  --color-accent: #4f46e5;
+  --color-accent-2: #06b6d4;
+  --color-success: #10b981;
+  --color-danger: #ef4444;
+  --color-warning: #fbbf24;
+  --color-pending: rgba(255, 209, 102, 0.9);
+
+  /* Backgrounds & Glass */
+  --color-glass: rgba(255, 255, 255, 0.03);
+  --color-faint: rgba(255, 255, 255, 0.01);
+
+  /* Shadows */
+  --shadow-strong: rgba(2, 6, 23, 0.6);
+  --shadow-medium: rgba(2, 6, 23, 0.45);
+
+  /* UI Components */
+  --color-toast-bg: rgba(2, 6, 23, 0.95);
+  --color-toast-text: #ffffff;
+  --color-modal-backdrop: rgba(2, 6, 23, 0.6);
+  --color-modal-shadow: rgba(2, 6, 23, 0.6);
+
+  /* Contraste */
+  --color-on-primary: #ffffff;
+
+  /* Typography */
+  --font-family:
+    Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial;
+  --font-size-base: 1rem;
+  --font-size-sm: 0.875rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.5rem;
+  --font-size-2xl: 2.15rem;
+  --font-weight-normal: 400;
+  --font-weight-medium: 600;
+  --font-weight-bold: 700;
+  --font-weight-extrabold: 800;
+
+  /* Spacing */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --space-2xl: 3rem;
+  --space-3xl: 4rem;
+
+  /* Border Radius */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 14px;
+  --radius-round: 30px;
+
+  /* Transitions */
+  --transition-fast: 0.12s ease;
+  --transition-normal: 0.16s ease;
+  --transition-slow: 0.25s ease;
+
+  /* Layout */
+  --max-width: 1100px;
+  --header-height: 64px;
+  --spacing-container: 2rem;
+  --z-header: 30;
+  --z-modal: 40;
+  --z-tooltip: 50;
+}
+
+/* Light Theme Overrides */
+body.light-theme {
+  --color-bg-primary: #f7fafc;
+  --color-bg-secondary: #ffffff;
+  --color-card: #ffffff;
+  --color-text-primary: #0b1220;
+  --color-text-secondary: #6b7280;
+  --color-glass: rgba(11, 18, 32, 0.03);
+  --color-faint: rgba(11, 18, 32, 0.01);
+  --color-danger: #dc2626;
+  --color-toast-bg: #ffffff;
+  --color-toast-text: #0b1220;
+  --color-modal-backdrop: rgba(11, 18, 32, 0.04);
+  --color-modal-shadow: rgba(11, 18, 32, 0.06);
+}

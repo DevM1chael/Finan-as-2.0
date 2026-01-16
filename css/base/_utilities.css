@@ -1,0 +1,73 @@
+/**
+ * @file css/base/_utilities.css
+ * @description Classes utilitárias comuns
+ */
+
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: var(--spacing-container);
+}
+
+.muted {
+  color: var(--color-text-secondary);
+}
+
+.large {
+  font-size: var(--font-size-sm);
+}
+
+.grid {
+  display: grid;
+  gap: 1rem;
+}
+
+.flex {
+  display: flex;
+}
+
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.mt-1 {
+  margin-top: var(--space-sm);
+}
+.mt-2 {
+  margin-top: var(--space-md);
+}
+.mt-3 {
+  margin-top: var(--space-lg);
+}
+.mt-4 {
+  margin-top: var(--space-xl);
+}
+
+.mb-1 {
+  margin-bottom: var(--space-sm);
+}
+.mb-2 {
+  margin-bottom: var(--space-md);
+}
+.mb-3 {
+  margin-bottom: var(--space-lg);
+}
+.mb-4 {
+  margin-bottom: var(--space-xl);
+}
+
+.gap-1 {
+  gap: var(--space-sm);
+}
+.gap-2 {
+  gap: var(--space-md);
+}
+.gap-3 {
+  gap: var(--space-lg);
+}

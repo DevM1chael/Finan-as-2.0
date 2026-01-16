@@ -1,0 +1,44 @@
+/**
+ * @file css/main.css
+ * @description Importação principal de todos os estilos (substitui assets/style.css)
+ * 
+ * ESTRUTURA:
+ * 1. Base: Variáveis, reset, utilitários
+ * 2. Componentes: Botões, cards, forms, tables
+ * 3. Layout: Header, footer, dashboard
+ * 4. Temas: Light/Dark theme overrides
+ * 5. Páginas: Estilos específicos por página
+ */
+
+/* ============================================================
+   BASE - Variáveis, Reset, Utilitários
+   ============================================================ */
+@import "./base/_variables.css";
+@import "./base/_reset.css";
+@import "./base/_utilities.css";
+
+/* ============================================================
+   COMPONENTES - Buttons, Cards, Forms, Tables
+   ============================================================ */
+@import "./components/_buttons.css";
+@import "./components/_cards.css";
+@import "./components/_forms.css";
+@import "./components/_tables.css";
+
+/* ============================================================
+   LAYOUT - Header, Footer, Main Layout
+   ============================================================ */
+@import "./layout/_header.css";
+@import "./layout/_footer.css";
+
+/* ============================================================
+   PÁGINAS - Estilos específicos
+   ============================================================ */
+@import "./pages/_home.css";
+@import "./pages/_dashboard.css";
+@import "./pages/_auth.css";
+
+/* ============================================================
+   TEMA - Light/Dark theme specific overrides
+   ============================================================ */
+@import "./themes/_light.css";

@@ -1,0 +1,77 @@
+/**
+ * @file css/themes/_light.css
+ * @description Overrides adicionais para tema claro
+ */
+
+body.light-theme {
+  background: linear-gradient(180deg, #ffffff 0%, #f3f4f6 100%);
+  color: #0b1220;
+}
+
+body.light-theme .site-header {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.9),
+    rgba(255, 255, 255, 0.9)
+  );
+  border-bottom: 1px solid rgba(11, 18, 32, 0.04);
+}
+
+body.light-theme .card {
+  box-shadow: 0 6px 20px rgba(11, 18, 32, 0.04);
+}
+
+body.light-theme .chart-card {
+  box-shadow: 0 6px 20px rgba(11, 18, 32, 0.04);
+}
+
+body.light-theme .transactions-card {
+  box-shadow: 0 6px 20px rgba(11, 18, 32, 0.04);
+}
+
+body.light-theme .quick-actions {
+  box-shadow: 0 6px 20px rgba(11, 18, 32, 0.04);
+}
+
+body.light-theme .hero-visual-card {
+  background: linear-gradient(
+    180deg,
+    rgba(11, 18, 32, 0.04),
+    rgba(11, 18, 32, 0.02)
+  );
+  border: 1px solid rgba(11, 18, 32, 0.06);
+}
+
+body.light-theme .feature {
+  box-shadow: 0 4px 12px rgba(11, 18, 32, 0.04);
+}
+
+body.light-theme .feature:hover {
+  box-shadow: 0 8px 20px rgba(11, 18, 32, 0.08);
+}
+
+body.light-theme .qa-toast {
+  background: #ffffff;
+  color: #0b1220;
+  box-shadow: 0 8px 24px rgba(11, 18, 32, 0.12);
+}
+
+body.light-theme .modal-dialog {
+  box-shadow: 0 20px 50px rgba(11, 18, 32, 0.12);
+}
+
+body.light-theme .quick-btn {
+  border-color: rgba(11, 18, 32, 0.08);
+}
+
+body.light-theme .quick-btn:hover {
+  background: rgba(11, 18, 32, 0.03);
+}
+
+body.light-theme thead {
+  background: rgba(11, 18, 32, 0.02);
+}
+
+body.light-theme tbody tr:hover {
+  background: rgba(11, 18, 32, 0.02);
+}
